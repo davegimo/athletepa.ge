@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/src/styles.css" rel="stylesheet">
+  <title>Editor Pagina Personale</title>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-center mb-8">Editor Pagina Personale</h1>
+    
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Editor Panel -->
+      <div class="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Editor</h2>
+        <div class="space-y-4">
+          <!-- Immagine Profilo -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Immagine Profilo</label>
+            <div class="mt-1 flex items-center">
+              <div id="profile-preview" class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <label for="profile-image" class="ml-4 cursor-pointer bg-indigo-600 py-2 px-3 text-sm font-medium text-white rounded-md hover:bg-indigo-700">
+                Carica Immagine
+                <input id="profile-image" type="file" accept="image/*" class="hidden">
+              </label>
+            </div>
+          </div>
+          
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
+            <input type="text" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Il tuo nome">
+          </div>
+          
+          <div>
+            <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
+            <textarea id="bio" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Breve descrizione"></textarea>
+          </div>
+          
+          <!-- Opzioni di Layout -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Layout</label>
+            <div class="mt-1 grid grid-cols-3 gap-3">
+              <div>
+                <input type="radio" id="layout-centered" name="layout" value="centered" class="hidden peer" checked>
+                <label for="layout-centered" class="flex flex-col items-center justify-center p-2 border-2 rounded-lg cursor-pointer peer-checked:border-indigo-500 hover:bg-gray-50">
+                  <div class="w-full h-12 bg-gray-200 flex flex-col items-center justify-center">
+                    <div class="w-8 h-2 bg-gray-400 mb-1"></div>
+                    <div class="w-6 h-1 bg-gray-400"></div>
+                  </div>
+                  <span class="mt-1 text-xs">Centrato</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="layout-left" name="layout" value="left" class="hidden peer">
+                <label for="layout-left" class="flex flex-col items-center justify-center p-2 border-2 rounded-lg cursor-pointer peer-checked:border-indigo-500 hover:bg-gray-50">
+                  <div class="w-full h-12 bg-gray-200 flex flex-col items-start justify-center pl-2">
+                    <div class="w-8 h-2 bg-gray-400 mb-1"></div>
+                    <div class="w-6 h-1 bg-gray-400"></div>
+                  </div>
+                  <span class="mt-1 text-xs">Sinistra</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="layout-right" name="layout" value="right" class="hidden peer">
+                <label for="layout-right" class="flex flex-col items-center justify-center p-2 border-2 rounded-lg cursor-pointer peer-checked:border-indigo-500 hover:bg-gray-50">
+                  <div class="w-full h-12 bg-gray-200 flex flex-col items-end justify-center pr-2">
+                    <div class="w-8 h-2 bg-gray-400 mb-1"></div>
+                    <div class="w-6 h-1 bg-gray-400"></div>
+                  </div>
+                  <span class="mt-1 text-xs">Destra</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="bgColor" class="block text-sm font-medium text-gray-700">Colore Sfondo</label>
+              <input type="color" id="bgColor" class="mt-1 block" value="#ffffff">
+            </div>
+            
+            <div>
+              <label for="textColor" class="block text-sm font-medium text-gray-700">Colore Testo</label>
+              <input type="color" id="textColor" class="mt-1 block" value="#000000">
+            </div>
+          </div>
+          
+          <div>
+            <label for="fontFamily" class="block text-sm font-medium text-gray-700">Font</label>
+            <select id="fontFamily" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              <option value="sans-serif">Sans-serif</option>
+              <option value="serif">Serif</option>
+              <option value="monospace">Monospace</option>
+              <option value="cursive">Cursive</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Link Social</label>
+            <div class="mt-1 space-y-2">
+              <div class="flex items-center">
+                <span class="mr-2">📸</span>
+                <input type="text" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Instagram (es. https://instagram.com/username)">
+              </div>
+              <div class="flex items-center">
+                <span class="mr-2">🐦</span>
+                <input type="text" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Twitter (es. https://twitter.com/username)">
+              </div>
+              <div class="flex items-center">
+                <span class="mr-2">💼</span>
+                <input type="text" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="LinkedIn (es. https://linkedin.com/in/username)">
+              </div>
+              <div class="flex items-center">
+                <span class="mr-2">🔗</span>
+                <input type="text" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Sito Web (es. https://miosito.com)">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Pulsanti di azione -->
+          <div class="pt-4 border-t border-gray-200 mt-6">
+            <div class="flex flex-col space-y-3">
+              <button id="export-btn" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors">
+                Esporta Pagina
+              </button>
+              <button id="share-btn" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
+                Condividi Link
+              </button>
+              <button id="reset-btn" class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition-colors">
+                Reimposta
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Preview Panel -->
+      <div class="w-full md:w-1/2 flex flex-col items-center">
+        <div class="smartphone-preview mb-4">
+          <div class="smartphone-frame bg-black rounded-[40px] w-[300px] h-[600px] p-3 shadow-xl">
+            <div class="notch bg-black h-6 w-40 absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-xl z-10"></div>
+            <div id="preview-screen" class="bg-white h-full w-full rounded-[32px] overflow-hidden relative">
+              <!-- Preview Content -->
+              <div id="preview-content" class="p-6 h-full flex flex-col items-center">
+                <div id="preview-profile-image" class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h2 id="preview-name" class="text-2xl font-bold mb-2">Il tuo nome</h2>
+                <p id="preview-bio" class="mb-4 text-center">La tua bio apparirà qui</p>
+                <div id="preview-links" class="space-y-2 w-full mt-auto">
+                  <!-- I link social appariranno qui -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Share Link Modal (nascosto di default) -->
+        <div id="share-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 class="text-lg font-semibold mb-4">Condividi la tua pagina</h3>
+            <div class="flex mb-4">
+              <input id="share-link" type="text" class="flex-grow border border-gray-300 rounded-l-md px-3 py-2" readonly value="https://athletepa.ge/p/example">
+              <button id="copy-link-btn" class="bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700">Copia</button>
+            </div>
+            <div class="flex justify-end">
+              <button id="close-modal-btn" class="text-gray-600 hover:text-gray-800">Chiudi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/src/editor.js"></script>
+</body>
+</html>

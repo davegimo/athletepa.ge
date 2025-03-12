@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* Stili personalizzati per l'editor e l'anteprima smartphone */
+
+/* Stile per il frame dello smartphone */
+.smartphone-frame {
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 2px solid #333;
+}
+
+/* Stile per il notch dello smartphone */
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background-color: #000;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  z-index: 10;
+}
+
+/* Stile per lo schermo dello smartphone */
+#preview-screen {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* Stile per il contenuto dell'anteprima */
+#preview-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Stili per i link social nell'anteprima */
+#preview-links a {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+#preview-links a:hover {
+  transform: translateY(-2px);
+}
+
+/* Stili per gli input dell'editor */
+input[type="text"], textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+input[type="color"] {
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .smartphone-preview {
+    margin-top: 2rem;
+  }
+} 
