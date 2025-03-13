@@ -2,6 +2,19 @@
 
 /* Stili personalizzati per l'editor e l'anteprima smartphone */
 
+/* Stile per la barra di progresso */
+#progress-container {
+  margin: 0;
+  padding: 0;
+  height: 1px;
+}
+
+#progress-container .progress {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
 /* Stile per il frame dello smartphone */
 .smartphone-frame {
   position: relative;
