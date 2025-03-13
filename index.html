@@ -1449,7 +1449,7 @@
         
         // Crea l'elemento per la squadra
         const teamItem = document.createElement('div');
-        teamItem.className = 'flex items-center justify-between bg-gray-700 rounded-md p-2';
+        teamItem.className = 'bg-gray-700 rounded-md overflow-hidden';
         teamItem.dataset.url = url ? normalizeUrl(url) : '';
         teamItem.dataset.name = name;
         teamItem.dataset.yearStart = yearStart;
@@ -1459,34 +1459,106 @@
         teamItem.dataset.trophies = trophies;
         teamItem.dataset.logo = currentTeamLogoUrl || customTeamLogoData;
         
-        // Crea il contenuto dell'elemento
-        teamItem.innerHTML = `
+        // Crea l'intestazione compatta (sempre visibile)
+        const teamHeader = document.createElement('div');
+        teamHeader.className = 'flex items-center justify-between p-3 cursor-pointer hover:bg-gray-600 transition-colors';
+        
+        // Aggiungi il contenuto dell'intestazione
+        teamHeader.innerHTML = `
           <div class="flex items-center">
             <div class="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden mr-3">
               <img src="${currentTeamLogoUrl || customTeamLogoData}" class="w-10 h-10 object-contain" alt="${name}">
             </div>
-            <div>
-              <div class="text-sm font-medium text-white">${name}</div>
-              <div class="text-xs text-gray-400">${yearStart} - ${yearEnd}</div>
-              <div class="flex space-x-3 mt-1">
-                <span class="text-xs text-gray-300">${appearances} presenze</span>
-                <span class="text-xs text-gray-300">${goals} gol</span>
-                <span class="text-xs text-gray-300">${trophies} trofei</span>
-              </div>
-            </div>
+            <div class="text-sm font-medium text-white">${name}</div>
           </div>
-          <button class="remove-team-btn text-gray-400 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
+          <div class="flex items-center space-x-2">
+            <button class="team-expand-btn text-gray-400 hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <button class="remove-team-btn text-gray-400 hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
         `;
         
+        // Crea il contenuto dettagliato (nascosto di default)
+        const teamDetails = document.createElement('div');
+        teamDetails.className = 'p-3 border-t border-gray-600 hidden bg-gray-800';
+        
+        // Aggiungi il contenuto dei dettagli
+        teamDetails.innerHTML = `
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <span class="text-xs text-gray-400">Periodo:</span>
+              <div class="text-sm text-white">${yearStart} - ${yearEnd}</div>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400">URL:</span>
+              <div class="text-sm text-white truncate">${url || 'Non specificato'}</div>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <span class="text-xs text-gray-400">Presenze:</span>
+              <div class="text-sm text-white">${appearances}</div>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400">Gol:</span>
+              <div class="text-sm text-white">${goals}</div>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400">Trofei:</span>
+              <div class="text-sm text-white">${trophies}</div>
+            </div>
+          </div>
+        `;
+        
+        // Aggiungi gli elementi al container principale
+        teamItem.appendChild(teamHeader);
+        teamItem.appendChild(teamDetails);
+        
         // Aggiungi event listener per il pulsante di rimozione
-        const removeBtn = teamItem.querySelector('.remove-team-btn');
-        removeBtn.addEventListener('click', function() {
+        const removeBtn = teamHeader.querySelector('.remove-team-btn');
+        removeBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Previeni la propagazione dell'evento
           teamItem.remove();
           updateTeamsPreview();
+        });
+        
+        // Aggiungi event listener per espandere/comprimere i dettagli
+        const expandBtn = teamHeader.querySelector('.team-expand-btn');
+        expandBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Previeni la propagazione dell'evento
+          
+          // Alterna la visibilità dei dettagli
+          teamDetails.classList.toggle('hidden');
+          
+          // Cambia l'icona in base allo stato
+          if (teamDetails.classList.contains('hidden')) {
+            this.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            `;
+          } else {
+            this.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+              </svg>
+            `;
+          }
+        });
+        
+        // Aggiungi anche un event listener sull'intestazione per espandere/comprimere
+        teamHeader.addEventListener('click', function(e) {
+          // Simula il click sul pulsante di espansione
+          if (!e.target.closest('.remove-team-btn')) {
+            expandBtn.click();
+          }
         });
         
         // Aggiungi l'elemento alla lista
@@ -1543,17 +1615,34 @@
           
           // Crea l'elemento per la squadra nell'anteprima
           const teamPreview = document.createElement('div');
-          teamPreview.className = 'flex flex-col items-center bg-gray-800 rounded-md p-3 w-full max-w-xs';
+          teamPreview.className = 'bg-gray-800 rounded-md w-full max-w-xs overflow-hidden';
           
-          // Aggiungi il contenuto
-          teamPreview.innerHTML = `
-            <div class="flex items-center mb-2">
+          // Crea l'intestazione compatta (sempre visibile)
+          const teamHeader = document.createElement('div');
+          teamHeader.className = 'flex items-center justify-between p-3 cursor-pointer hover:bg-gray-700 transition-colors';
+          
+          // Aggiungi il contenuto dell'intestazione
+          teamHeader.innerHTML = `
+            <div class="flex items-center">
               <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden mr-2">
                 <img src="${logo}" class="w-6 h-6 object-contain" alt="${name}">
               </div>
               <div class="text-sm font-medium text-white">${name}</div>
             </div>
-            <div class="text-xs text-gray-400 mb-2">${yearStart} - ${yearEnd}</div>
+            <button class="team-expand-btn text-gray-400 hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          `;
+          
+          // Crea il contenuto dettagliato (nascosto di default)
+          const teamDetails = document.createElement('div');
+          teamDetails.className = 'p-3 border-t border-gray-700 hidden';
+          
+          // Aggiungi il contenuto dei dettagli
+          teamDetails.innerHTML = `
+            <div class="text-xs text-gray-400 mb-3">${yearStart} - ${yearEnd}</div>
             <div class="flex justify-center space-x-4 w-full">
               <div class="flex flex-col items-center">
                 <span class="text-lg font-semibold text-white">${appearances}</span>
@@ -1570,21 +1659,55 @@
             </div>
           `;
           
+          // Aggiungi gli elementi al container principale
+          teamPreview.appendChild(teamHeader);
+          teamPreview.appendChild(teamDetails);
+          
           // Se c'è un URL, rendi cliccabile il logo e il nome
           if (url) {
-            const teamHeader = teamPreview.querySelector('.flex.items-center.mb-2');
+            const logoAndName = teamHeader.querySelector('.flex.items-center');
             const teamLink = document.createElement('a');
             teamLink.href = url;
             teamLink.target = '_blank';
             teamLink.className = 'flex items-center hover:opacity-80 transition-opacity';
             
             // Sposta gli elementi dal div originale al link
-            while (teamHeader.firstChild) {
-              teamLink.appendChild(teamHeader.firstChild);
+            while (logoAndName.firstChild) {
+              teamLink.appendChild(logoAndName.firstChild);
             }
             
-            teamHeader.appendChild(teamLink);
+            logoAndName.appendChild(teamLink);
           }
+          
+          // Aggiungi event listener per espandere/comprimere i dettagli
+          const expandBtn = teamHeader.querySelector('.team-expand-btn');
+          expandBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Previeni la propagazione dell'evento
+            
+            // Alterna la visibilità dei dettagli
+            teamDetails.classList.toggle('hidden');
+            
+            // Cambia l'icona in base allo stato
+            if (teamDetails.classList.contains('hidden')) {
+              this.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              `;
+            } else {
+              this.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+              `;
+            }
+          });
+          
+          // Aggiungi anche un event listener sull'intestazione per espandere/comprimere
+          teamHeader.addEventListener('click', function() {
+            // Simula il click sul pulsante di espansione
+            expandBtn.click();
+          });
           
           previewTeams.appendChild(teamPreview);
         });
