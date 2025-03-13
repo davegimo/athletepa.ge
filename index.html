@@ -299,6 +299,95 @@
             </div>
           </div>
           
+          <!-- Sezione Squadre -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Squadre</label>
+            <div class="space-y-4">
+              <!-- Form per aggiungere una squadra -->
+              <div class="bg-gray-700 p-3 rounded-md">
+                <div class="mb-3">
+                  <label for="team-url" class="block text-xs font-medium text-gray-400 mb-1">URL Sito Squadra</label>
+                  <div class="flex">
+                    <input type="text" id="team-url" class="block w-full rounded-l-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. juventus.com">
+                    <button id="team-fetch-logo" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110 2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="team-name" class="block text-xs font-medium text-gray-400 mb-1">Nome Squadra</label>
+                  <input type="text" id="team-name" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. Juventus FC">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                  <div>
+                    <label for="team-year-start" class="block text-xs font-medium text-gray-400 mb-1">Anno Inizio</label>
+                    <input type="number" id="team-year-start" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. 2018" min="1900" max="2100">
+                  </div>
+                  <div>
+                    <label for="team-year-end" class="block text-xs font-medium text-gray-400 mb-1">Anno Fine</label>
+                    <div class="flex items-center space-x-2">
+                      <input type="number" id="team-year-end" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. 2022" min="1900" max="2100">
+                      <div class="flex items-center">
+                        <input type="checkbox" id="team-present" class="rounded bg-gray-800 border-gray-600 text-indigo-600 focus:ring-indigo-500">
+                        <label for="team-present" class="ml-1 text-xs text-gray-400">Presente</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-3 mb-3">
+                  <div>
+                    <label for="team-appearances" class="block text-xs font-medium text-gray-400 mb-1">Presenze</label>
+                    <input type="number" id="team-appearances" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="0" min="0">
+                  </div>
+                  <div>
+                    <label for="team-goals" class="block text-xs font-medium text-gray-400 mb-1">Gol</label>
+                    <input type="number" id="team-goals" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="0" min="0">
+                  </div>
+                  <div>
+                    <label for="team-trophies" class="block text-xs font-medium text-gray-400 mb-1">Trofei</label>
+                    <input type="number" id="team-trophies" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="0" min="0">
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="block text-xs font-medium text-gray-400 mb-1">Logo Personalizzato (opzionale)</label>
+                  <div class="flex items-center space-x-2">
+                    <label for="team-custom-logo" class="cursor-pointer bg-gray-800 py-2 px-3 text-xs font-medium text-white rounded-md hover:bg-gray-700 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      Carica Logo
+                      <input id="team-custom-logo" type="file" accept="image/*" class="hidden">
+                    </label>
+                    <span id="team-custom-logo-name" class="text-xs text-gray-400">Nessun file selezionato</span>
+                  </div>
+                </div>
+                
+                <div class="flex items-center space-x-3 mt-4">
+                  <div id="team-logo-preview" class="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden">
+                    <span class="text-xs text-gray-500">Logo</span>
+                  </div>
+                  <button id="team-add" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    Aggiungi Squadra
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Lista delle squadre aggiunte -->
+              <div id="teams-list" class="space-y-2">
+                <!-- Le squadre aggiunte verranno inserite qui dinamicamente -->
+              </div>
+            </div>
+          </div>
+          
           <!-- Pulsanti di azione -->
           <div class="pt-4 border-t border-gray-700 mt-6">
             <div class="flex flex-col space-y-3">
@@ -527,6 +616,14 @@
                     <h3 class="text-sm font-semibold mb-3 text-center">I miei sponsor</h3>
                     <div id="preview-sponsors" class="flex flex-wrap justify-center gap-3">
                       <!-- Gli sponsor verranno inseriti qui dinamicamente -->
+                    </div>
+                  </div>
+                  
+                  <!-- Sezione squadre nell'anteprima -->
+                  <div class="mt-8 w-full">
+                    <h3 class="text-sm font-semibold mb-3 text-center">Le mie squadre</h3>
+                    <div id="preview-teams" class="flex flex-col items-center gap-4">
+                      <!-- Le squadre verranno inserite qui dinamicamente -->
                     </div>
                   </div>
                 </div>
@@ -1233,6 +1330,263 @@
           `;
           
           previewSponsors.appendChild(sponsorPreview);
+        });
+      }
+      
+      // Gestione delle squadre
+      const teamUrlInput = document.getElementById('team-url');
+      const teamNameInput = document.getElementById('team-name');
+      const teamYearStartInput = document.getElementById('team-year-start');
+      const teamYearEndInput = document.getElementById('team-year-end');
+      const teamPresentCheckbox = document.getElementById('team-present');
+      const teamAppearancesInput = document.getElementById('team-appearances');
+      const teamGoalsInput = document.getElementById('team-goals');
+      const teamTrophiesInput = document.getElementById('team-trophies');
+      const teamCustomLogoInput = document.getElementById('team-custom-logo');
+      const teamCustomLogoName = document.getElementById('team-custom-logo-name');
+      const teamLogoPreview = document.getElementById('team-logo-preview');
+      const teamFetchLogoButton = document.getElementById('team-fetch-logo');
+      const teamAddButton = document.getElementById('team-add');
+      const teamsList = document.getElementById('teams-list');
+      const previewTeams = document.getElementById('preview-teams');
+      
+      // Variabili per memorizzare il logo della squadra
+      let currentTeamLogoUrl = '';
+      let customTeamLogoData = '';
+      
+      // Event listener per il checkbox "Presente"
+      teamPresentCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+          teamYearEndInput.disabled = true;
+          teamYearEndInput.value = '';
+        } else {
+          teamYearEndInput.disabled = false;
+        }
+      });
+      
+      // Event listener per l'upload del logo personalizzato
+      teamCustomLogoInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          teamCustomLogoName.textContent = file.name;
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            customTeamLogoData = e.target.result;
+            
+            // Aggiorna l'anteprima del logo
+            teamLogoPreview.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = customTeamLogoData;
+            img.className = 'w-full h-full object-contain';
+            teamLogoPreview.appendChild(img);
+            
+            // Imposta il logo personalizzato come logo corrente
+            currentTeamLogoUrl = '';
+          };
+          
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      // Funzione per recuperare il logo della squadra
+      function fetchTeamLogo(url) {
+        const domain = extractDomain(url);
+        if (!domain) return;
+        
+        // Utilizziamo Google Favicon Service per recuperare il logo
+        const logoUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+        
+        // Aggiorna l'anteprima del logo
+        teamLogoPreview.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = logoUrl;
+        img.className = 'w-full h-full object-contain';
+        teamLogoPreview.appendChild(img);
+        
+        // Memorizza l'URL del logo
+        currentTeamLogoUrl = logoUrl;
+        customTeamLogoData = '';
+        
+        // Compila automaticamente il nome della squadra se non è già stato inserito
+        if (!teamNameInput.value) {
+          teamNameInput.value = domain.replace(/^www\./, '').split('.')[0];
+          // Rendi maiuscola la prima lettera
+          teamNameInput.value = teamNameInput.value.charAt(0).toUpperCase() + teamNameInput.value.slice(1);
+        }
+      }
+      
+      // Event listener per il pulsante di recupero logo
+      teamFetchLogoButton.addEventListener('click', function() {
+        if (teamUrlInput.value.trim()) {
+          fetchTeamLogo(teamUrlInput.value.trim());
+        }
+      });
+      
+      // Event listener per l'input dell'URL (recupera il logo quando si preme Enter)
+      teamUrlInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+          fetchTeamLogo(this.value.trim());
+          e.preventDefault();
+        }
+      });
+      
+      // Funzione per aggiungere una squadra
+      function addTeam() {
+        const url = teamUrlInput.value.trim();
+        const name = teamNameInput.value.trim();
+        const yearStart = teamYearStartInput.value.trim();
+        const isPresent = teamPresentCheckbox.checked;
+        const yearEnd = isPresent ? 'Presente' : teamYearEndInput.value.trim();
+        const appearances = teamAppearancesInput.value.trim() || '0';
+        const goals = teamGoalsInput.value.trim() || '0';
+        const trophies = teamTrophiesInput.value.trim() || '0';
+        
+        if (!name || !yearStart || (!isPresent && !yearEnd) || (!currentTeamLogoUrl && !customTeamLogoData)) {
+          alert('Inserisci almeno il nome della squadra, l\'anno di inizio, l\'anno di fine (o seleziona "Presente") e un logo.');
+          return;
+        }
+        
+        // Crea l'elemento per la squadra
+        const teamItem = document.createElement('div');
+        teamItem.className = 'flex items-center justify-between bg-gray-700 rounded-md p-2';
+        teamItem.dataset.url = url ? normalizeUrl(url) : '';
+        teamItem.dataset.name = name;
+        teamItem.dataset.yearStart = yearStart;
+        teamItem.dataset.yearEnd = yearEnd;
+        teamItem.dataset.appearances = appearances;
+        teamItem.dataset.goals = goals;
+        teamItem.dataset.trophies = trophies;
+        teamItem.dataset.logo = currentTeamLogoUrl || customTeamLogoData;
+        
+        // Crea il contenuto dell'elemento
+        teamItem.innerHTML = `
+          <div class="flex items-center">
+            <div class="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden mr-3">
+              <img src="${currentTeamLogoUrl || customTeamLogoData}" class="w-10 h-10 object-contain" alt="${name}">
+            </div>
+            <div>
+              <div class="text-sm font-medium text-white">${name}</div>
+              <div class="text-xs text-gray-400">${yearStart} - ${yearEnd}</div>
+              <div class="flex space-x-3 mt-1">
+                <span class="text-xs text-gray-300">${appearances} presenze</span>
+                <span class="text-xs text-gray-300">${goals} gol</span>
+                <span class="text-xs text-gray-300">${trophies} trofei</span>
+              </div>
+            </div>
+          </div>
+          <button class="remove-team-btn text-gray-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        `;
+        
+        // Aggiungi event listener per il pulsante di rimozione
+        const removeBtn = teamItem.querySelector('.remove-team-btn');
+        removeBtn.addEventListener('click', function() {
+          teamItem.remove();
+          updateTeamsPreview();
+        });
+        
+        // Aggiungi l'elemento alla lista
+        teamsList.appendChild(teamItem);
+        
+        // Aggiorna l'anteprima
+        updateTeamsPreview();
+        
+        // Resetta i campi
+        teamUrlInput.value = '';
+        teamNameInput.value = '';
+        teamYearStartInput.value = '';
+        teamYearEndInput.value = '';
+        teamPresentCheckbox.checked = false;
+        teamYearEndInput.disabled = false;
+        teamAppearancesInput.value = '';
+        teamGoalsInput.value = '';
+        teamTrophiesInput.value = '';
+        teamCustomLogoName.textContent = 'Nessun file selezionato';
+        teamLogoPreview.innerHTML = '<span class="text-xs text-gray-500">Logo</span>';
+        currentTeamLogoUrl = '';
+        customTeamLogoData = '';
+      }
+      
+      // Event listener per il pulsante di aggiunta squadra
+      teamAddButton.addEventListener('click', addTeam);
+      
+      // Funzione per aggiornare l'anteprima delle squadre
+      function updateTeamsPreview() {
+        previewTeams.innerHTML = '';
+        
+        // Ottieni tutte le squadre aggiunte
+        const addedTeams = document.querySelectorAll('#teams-list > div');
+        
+        // Se non ci sono squadre, nascondi la sezione
+        const teamSection = previewTeams.parentElement;
+        if (addedTeams.length === 0) {
+          teamSection.classList.add('hidden');
+          return;
+        } else {
+          teamSection.classList.remove('hidden');
+        }
+        
+        // Aggiungi le squadre all'anteprima
+        addedTeams.forEach(teamItem => {
+          const url = teamItem.dataset.url;
+          const name = teamItem.dataset.name;
+          const yearStart = teamItem.dataset.yearStart;
+          const yearEnd = teamItem.dataset.yearEnd;
+          const appearances = teamItem.dataset.appearances;
+          const goals = teamItem.dataset.goals;
+          const trophies = teamItem.dataset.trophies;
+          const logo = teamItem.dataset.logo;
+          
+          // Crea l'elemento per la squadra nell'anteprima
+          const teamPreview = document.createElement('div');
+          teamPreview.className = 'flex flex-col items-center bg-gray-800 rounded-md p-3 w-full max-w-xs';
+          
+          // Aggiungi il contenuto
+          teamPreview.innerHTML = `
+            <div class="flex items-center mb-2">
+              <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden mr-2">
+                <img src="${logo}" class="w-6 h-6 object-contain" alt="${name}">
+              </div>
+              <div class="text-sm font-medium text-white">${name}</div>
+            </div>
+            <div class="text-xs text-gray-400 mb-2">${yearStart} - ${yearEnd}</div>
+            <div class="flex justify-center space-x-4 w-full">
+              <div class="flex flex-col items-center">
+                <span class="text-lg font-semibold text-white">${appearances}</span>
+                <span class="text-xs text-gray-400">Presenze</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-lg font-semibold text-white">${goals}</span>
+                <span class="text-xs text-gray-400">Gol</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-lg font-semibold text-white">${trophies}</span>
+                <span class="text-xs text-gray-400">Trofei</span>
+              </div>
+            </div>
+          `;
+          
+          // Se c'è un URL, rendi cliccabile il logo e il nome
+          if (url) {
+            const teamHeader = teamPreview.querySelector('.flex.items-center.mb-2');
+            const teamLink = document.createElement('a');
+            teamLink.href = url;
+            teamLink.target = '_blank';
+            teamLink.className = 'flex items-center hover:opacity-80 transition-opacity';
+            
+            // Sposta gli elementi dal div originale al link
+            while (teamHeader.firstChild) {
+              teamLink.appendChild(teamHeader.firstChild);
+            }
+            
+            teamHeader.appendChild(teamLink);
+          }
+          
+          previewTeams.appendChild(teamPreview);
         });
       }
     });
