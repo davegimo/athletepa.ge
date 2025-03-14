@@ -187,98 +187,128 @@
             <input type="text" id="name" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Il tuo nome">
           </div>
           
-          <div>
-            <label for="bio" class="block text-sm font-medium text-gray-300">Bio</label>
-            <textarea id="bio" rows="3" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Breve descrizione"></textarea>
+          <!-- Sezione Bio -->
+          <div class="mb-6">
+            <label for="bio" class="block text-sm font-medium text-gray-300 mb-2">Bio</label>
+            <textarea id="bio" rows="4" class="block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Scrivi qualcosa su di te..."></textarea>
           </div>
           
           <!-- Sezione Squadre -->
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Squadre</label>
-            <div class="space-y-4">
-              <!-- Form per aggiungere una squadra -->
-              <div class="bg-gray-700 p-3 rounded-md">
-                <div class="mb-3">
-                  <label for="team-url" class="block text-xs font-medium text-gray-400 mb-1">URL Sito Squadra</label>
-                  <div class="flex">
-                    <input type="text" id="team-url" class="block w-full rounded-l-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. juventus.com">
-                    <button id="team-fetch-logo" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110 2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                      </svg>
-                    </button>
-                  </div>
+          <div class="mb-6 bg-gray-800 rounded-lg p-4">
+            <h2 class="text-lg font-semibold text-white mb-4">Squadre</h2>
+            
+            <!-- Bottone iniziale -->
+            <div id="team-initial-button" class="mb-4">
+              <button id="team-start-add" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md flex items-center justify-center w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Aggiungi squadra
+              </button>
+            </div>
+            
+            <!-- Fase 1: Input URL -->
+            <div id="team-url-input-phase" class="mb-4 hidden">
+              <div class="mb-3">
+                <label for="team-url" class="block text-sm font-medium text-gray-300 mb-1">URL della squadra</label>
+                <div class="flex">
+                  <input type="text" id="team-url" class="flex-grow bg-gray-700 text-white rounded-l-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="https://www.squadra.com">
+                  <button id="team-fetch-logo" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-r-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
                 </div>
-                
-                <div class="mb-3">
-                  <label for="team-name" class="block text-xs font-medium text-gray-400 mb-1">Nome Squadra</label>
-                  <input type="text" id="team-name" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. Juventus FC">
-                </div>
-                
-                <div class="grid grid-cols-2 gap-3 mb-3">
-                  <div>
-                    <label for="team-year-start" class="block text-xs font-medium text-gray-400 mb-1">Anno Inizio</label>
-                    <input type="number" id="team-year-start" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. 2018" min="1900" max="2100">
-                  </div>
-                  <div>
-                    <label for="team-year-end" class="block text-xs font-medium text-gray-400 mb-1">Anno Fine</label>
-                    <div class="flex items-center space-x-2">
-                      <input type="number" id="team-year-end" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. 2022" min="1900" max="2100">
+                <p class="text-xs text-gray-400 mt-1">Inserisci l'URL della squadra per recuperare automaticamente il logo</p>
+              </div>
+              <div class="flex justify-end">
+                <button id="team-url-cancel" class="text-gray-400 hover:text-white mr-3">Annulla</button>
+              </div>
+            </div>
+            
+            <!-- Fase 2: Dettagli squadra -->
+            <div id="team-details-phase" class="mb-4 hidden">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Logo squadra -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Logo squadra</label>
+                  <div class="flex items-start">
+                    <div id="team-logo-preview" class="w-16 h-16 bg-gray-700 rounded-md flex items-center justify-center overflow-hidden mr-3">
+                      <span class="text-xs text-gray-500">Logo</span>
+                    </div>
+                    <div class="flex-grow">
+                      <label for="team-custom-logo" class="block text-xs text-gray-400 mb-1">Logo personalizzato (opzionale)</label>
                       <div class="flex items-center">
-                        <input type="checkbox" id="team-present" class="rounded bg-gray-800 border-gray-600 text-indigo-600 focus:ring-indigo-500">
-                        <label for="team-present" class="ml-1 text-xs text-gray-400">Presente</label>
+                        <label class="block w-full">
+                          <span class="sr-only">Scegli un logo personalizzato</span>
+                          <input type="file" id="team-custom-logo" class="hidden" accept="image/*">
+                          <div class="bg-gray-700 text-white text-sm py-1 px-3 rounded-md cursor-pointer hover:bg-gray-600 transition-colors">
+                            Scegli file
+                          </div>
+                        </label>
                       </div>
+                      <span id="team-custom-logo-name" class="text-xs text-gray-400 block mt-1 truncate">Nessun file selezionato</span>
                     </div>
                   </div>
                 </div>
                 
-                <div class="grid grid-cols-3 gap-3 mb-3">
-                  <div>
-                    <label for="team-appearances" class="block text-xs font-medium text-gray-400 mb-1">Presenze</label>
-                    <input type="number" id="team-appearances" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="0" min="0">
-                  </div>
-                  <div>
-                    <label for="team-goals" class="block text-xs font-medium text-gray-400 mb-1">Gol</label>
-                    <input type="number" id="team-goals" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="0" min="0">
-                  </div>
-                  <div>
-                    <label for="team-trophies" class="block text-xs font-medium text-gray-400 mb-1">Trofei</label>
-                    <input type="number" id="team-trophies" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="0" min="0">
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="block text-xs font-medium text-gray-400 mb-1">Logo Personalizzato (opzionale)</label>
-                  <div class="flex items-center space-x-2">
-                    <label for="team-custom-logo" class="cursor-pointer bg-gray-800 py-2 px-3 text-xs font-medium text-white rounded-md hover:bg-gray-700 flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                      </svg>
-                      Carica Logo
-                      <input id="team-custom-logo" type="file" accept="image/*" class="hidden">
-                    </label>
-                    <span id="team-custom-logo-name" class="text-xs text-gray-400">Nessun file selezionato</span>
-                  </div>
-                </div>
-                
-                <div class="flex items-center space-x-3 mt-4">
-                  <div id="team-logo-preview" class="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden">
-                    <span class="text-xs text-gray-500">Logo</span>
-                  </div>
-                  <button id="team-add" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md text-sm flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                    </svg>
-                    Aggiungi Squadra
-                  </button>
+                <!-- Nome squadra -->
+                <div>
+                  <label for="team-name" class="block text-sm font-medium text-gray-300 mb-1">Nome squadra</label>
+                  <input type="text" id="team-name" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="Nome della squadra">
                 </div>
               </div>
               
-              <!-- Lista delle squadre aggiunte -->
-              <div id="teams-list" class="space-y-2">
-                <!-- Le squadre aggiunte verranno inserite qui dinamicamente -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Anno inizio -->
+                <div>
+                  <label for="team-year-start" class="block text-sm font-medium text-gray-300 mb-1">Anno inizio</label>
+                  <input type="number" id="team-year-start" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="2020">
+                </div>
+                
+                <!-- Anno fine -->
+                <div>
+                  <div class="flex items-center justify-between">
+                    <label for="team-year-end" class="block text-sm font-medium text-gray-300 mb-1">Anno fine</label>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="team-present" class="mr-1">
+                      <label for="team-present" class="text-xs text-gray-300">Presente</label>
+                    </div>
+                  </div>
+                  <input type="number" id="team-year-end" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="2023">
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-3 gap-4 mb-4">
+                <!-- Presenze -->
+                <div>
+                  <label for="team-appearances" class="block text-sm font-medium text-gray-300 mb-1">Presenze</label>
+                  <input type="number" id="team-appearances" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="0">
+                </div>
+                
+                <!-- Gol -->
+                <div>
+                  <label for="team-goals" class="block text-sm font-medium text-gray-300 mb-1">Gol</label>
+                  <input type="number" id="team-goals" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="0">
+                </div>
+                
+                <!-- Trofei -->
+                <div>
+                  <label for="team-trophies" class="block text-sm font-medium text-gray-300 mb-1">Trofei</label>
+                  <input type="number" id="team-trophies" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="0">
+                </div>
+              </div>
+              
+              <div class="flex justify-end">
+                <button id="team-details-cancel" class="text-gray-400 hover:text-white mr-3">Annulla</button>
+                <button id="team-add" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md">
+                  Aggiungi
+                </button>
               </div>
             </div>
+            
+            <!-- Lista squadre -->
+            <div id="teams-list" class="space-y-3"></div>
           </div>
           
           <!-- Sezione Sponsor -->
@@ -293,7 +323,7 @@
                     <input type="text" id="sponsor-url" class="block w-full rounded-l-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. amazon.com">
                     <button id="sponsor-fetch-favicon" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110 2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110 2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
                       </svg>
                     </button>
                   </div>
@@ -629,9 +659,9 @@
                   </div>
                   
                   <!-- Sezione squadre nell'anteprima -->
-                  <div class="mt-8 w-full">
-                    <h3 class="text-sm font-semibold mb-3 text-center">Le mie squadre</h3>
-                    <div id="preview-teams" class="flex flex-col items-center gap-4">
+                  <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-white mb-3">Le mie squadre</h3>
+                    <div id="preview-teams" class="flex flex-wrap justify-center gap-3">
                       <!-- Le squadre verranno inserite qui dinamicamente -->
                     </div>
                   </div>
@@ -1528,9 +1558,62 @@
       const teamsList = document.getElementById('teams-list');
       const previewTeams = document.getElementById('preview-teams');
       
+      // Elementi per le fasi di aggiunta squadra
+      const teamInitialButton = document.getElementById('team-initial-button');
+      const teamStartAddButton = document.getElementById('team-start-add');
+      const teamUrlInputPhase = document.getElementById('team-url-input-phase');
+      const teamUrlCancelButton = document.getElementById('team-url-cancel');
+      const teamDetailsPhase = document.getElementById('team-details-phase');
+      const teamDetailsCancelButton = document.getElementById('team-details-cancel');
+      
       // Variabili per memorizzare il logo della squadra
       let currentTeamLogoUrl = '';
       let customTeamLogoData = '';
+      
+      // Funzione per mostrare la fase di input URL
+      function showTeamUrlInputPhase() {
+        teamInitialButton.classList.add('hidden');
+        teamUrlInputPhase.classList.remove('hidden');
+        teamDetailsPhase.classList.add('hidden');
+        teamUrlInput.value = '';
+        teamUrlInput.focus();
+      }
+      
+      // Funzione per mostrare la fase di dettagli squadra
+      function showTeamDetailsPhase() {
+        teamInitialButton.classList.add('hidden');
+        teamUrlInputPhase.classList.add('hidden');
+        teamDetailsPhase.classList.remove('hidden');
+      }
+      
+      // Funzione per annullare e tornare al bottone iniziale
+      function resetTeamAddProcess() {
+        teamInitialButton.classList.remove('hidden');
+        teamUrlInputPhase.classList.add('hidden');
+        teamDetailsPhase.classList.add('hidden');
+        
+        // Resetta tutti i campi
+        teamUrlInput.value = '';
+        teamNameInput.value = '';
+        teamYearStartInput.value = '';
+        teamYearEndInput.value = '';
+        teamPresentCheckbox.checked = false;
+        teamYearEndInput.disabled = false;
+        teamAppearancesInput.value = '';
+        teamGoalsInput.value = '';
+        teamTrophiesInput.value = '';
+        teamCustomLogoName.textContent = 'Nessun file selezionato';
+        teamLogoPreview.innerHTML = '<span class="text-xs text-gray-500">Logo</span>';
+        currentTeamLogoUrl = '';
+        customTeamLogoData = '';
+      }
+      
+      // Event listener per il bottone iniziale
+      teamStartAddButton.addEventListener('click', showTeamUrlInputPhase);
+      
+      // Event listener per i pulsanti di annullamento
+      teamUrlCancelButton.addEventListener('click', resetTeamAddProcess);
+      teamDetailsCancelButton.addEventListener('click', resetTeamAddProcess);
       
       // Event listener per il checkbox "Presente"
       teamPresentCheckbox.addEventListener('change', function() {
@@ -1592,6 +1675,9 @@
           // Rendi maiuscola la prima lettera
           teamNameInput.value = teamNameInput.value.charAt(0).toUpperCase() + teamNameInput.value.slice(1);
         }
+        
+        // Passa alla fase dei dettagli
+        showTeamDetailsPhase();
       }
       
       // Event listener per il pulsante di recupero logo
@@ -1745,20 +1831,8 @@
         // Aggiorna l'anteprima
         updateTeamsPreview();
         
-        // Resetta i campi
-        teamUrlInput.value = '';
-        teamNameInput.value = '';
-        teamYearStartInput.value = '';
-        teamYearEndInput.value = '';
-        teamPresentCheckbox.checked = false;
-        teamYearEndInput.disabled = false;
-        teamAppearancesInput.value = '';
-        teamGoalsInput.value = '';
-        teamTrophiesInput.value = '';
-        teamCustomLogoName.textContent = 'Nessun file selezionato';
-        teamLogoPreview.innerHTML = '<span class="text-xs text-gray-500">Logo</span>';
-        currentTeamLogoUrl = '';
-        customTeamLogoData = '';
+        // Resetta il processo di aggiunta
+        resetTeamAddProcess();
       }
       
       // Event listener per il pulsante di aggiunta squadra
@@ -1766,155 +1840,63 @@
       
       // Funzione per aggiornare l'anteprima delle squadre
       function updateTeamsPreview() {
+        // Svuota il contenitore dell'anteprima
         previewTeams.innerHTML = '';
         
-        // Ottieni tutte le squadre aggiunte
-        const addedTeams = document.querySelectorAll('#teams-list > div');
+        // Ottieni tutte le squadre dalla lista
+        const teams = teamsList.querySelectorAll('div[data-name]');
         
-        // Se non ci sono squadre, nascondi la sezione
-        const teamSection = previewTeams.parentElement;
-        if (addedTeams.length === 0) {
-          teamSection.classList.add('hidden');
+        if (teams.length === 0) {
+          // Se non ci sono squadre, mostra un messaggio
+          previewTeams.innerHTML = '<p class="text-sm text-gray-400 text-center">Nessuna squadra aggiunta</p>';
           return;
-        } else {
-          teamSection.classList.remove('hidden');
         }
         
-        // Ottieni il layout corrente
-        const currentLayout = getCurrentLayout();
+        // Crea un contenitore flessibile per le squadre
+        const teamsContainer = document.createElement('div');
+        teamsContainer.className = 'flex flex-wrap justify-center gap-3';
         
-        // Applica l'allineamento in base al layout
-        previewTeams.classList.remove('items-center', 'items-start', 'items-end');
-        if (currentLayout === 'centered') {
-          previewTeams.classList.add('items-center');
-        } else if (currentLayout === 'left') {
-          previewTeams.classList.add('items-start');
-        } else if (currentLayout === 'right') {
-          previewTeams.classList.add('items-end');
-        }
-        
-        // Aggiorna anche l'allineamento del titolo della sezione
-        const teamSectionTitle = teamSection.querySelector('h3');
-        if (teamSectionTitle) {
-          teamSectionTitle.classList.remove('text-center', 'text-left', 'text-right');
-          if (currentLayout === 'centered') {
-            teamSectionTitle.classList.add('text-center');
-          } else if (currentLayout === 'left') {
-            teamSectionTitle.classList.add('text-left');
-          } else if (currentLayout === 'right') {
-            teamSectionTitle.classList.add('text-right');
-          }
-        }
-        
-        // Aggiungi le squadre all'anteprima
-        addedTeams.forEach(teamItem => {
-          const url = teamItem.dataset.url;
-          const name = teamItem.dataset.name;
-          const yearStart = teamItem.dataset.yearStart;
-          const yearEnd = teamItem.dataset.yearEnd;
-          const appearances = teamItem.dataset.appearances;
-          const goals = teamItem.dataset.goals;
-          const trophies = teamItem.dataset.trophies;
-          const logo = teamItem.dataset.logo;
+        // Aggiungi ogni squadra all'anteprima
+        teams.forEach(team => {
+          const name = team.dataset.name;
+          const logo = team.dataset.logo;
+          const yearStart = team.dataset.yearStart;
+          const yearEnd = team.dataset.yearEnd;
           
           // Crea l'elemento per la squadra nell'anteprima
           const teamPreview = document.createElement('div');
-          teamPreview.className = 'bg-gray-800 rounded-md w-full max-w-xs overflow-hidden';
+          teamPreview.className = 'flex flex-col items-center';
           
-          // Crea l'intestazione compatta (sempre visibile)
-          const teamHeader = document.createElement('div');
-          teamHeader.className = 'flex items-center justify-between p-3 cursor-pointer hover:bg-gray-700 transition-colors';
+          // Aggiungi il logo
+          const logoContainer = document.createElement('div');
+          logoContainer.className = 'w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center overflow-hidden mb-1';
           
-          // Aggiungi il contenuto dell'intestazione
-          teamHeader.innerHTML = `
-            <div class="flex items-center">
-              <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden mr-2">
-                <img src="${logo}" class="w-6 h-6 object-contain" alt="${name}">
-              </div>
-              <div class="text-sm font-medium text-white">${name}</div>
-            </div>
-            <button class="team-expand-btn text-gray-400 hover:text-white transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </button>
-          `;
+          const logoImg = document.createElement('img');
+          logoImg.src = logo;
+          logoImg.className = 'w-10 h-10 object-contain';
+          logoImg.alt = name;
           
-          // Crea il contenuto dettagliato (nascosto di default)
-          const teamDetails = document.createElement('div');
-          teamDetails.className = 'p-3 border-t border-gray-700 hidden';
+          logoContainer.appendChild(logoImg);
+          teamPreview.appendChild(logoContainer);
           
-          // Aggiungi il contenuto dei dettagli
-          teamDetails.innerHTML = `
-            <div class="text-xs text-gray-400 mb-3">${yearStart} - ${yearEnd}</div>
-            <div class="flex justify-center space-x-4 w-full">
-              <div class="flex flex-col items-center">
-                <span class="text-lg font-semibold text-white">${appearances}</span>
-                <span class="text-xs text-gray-400">Presenze</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <span class="text-lg font-semibold text-white">${goals}</span>
-                <span class="text-xs text-gray-400">Gol</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <span class="text-lg font-semibold text-white">${trophies}</span>
-                <span class="text-xs text-gray-400">Trofei</span>
-              </div>
-            </div>
-          `;
+          // Aggiungi il nome
+          const nameElement = document.createElement('span');
+          nameElement.className = 'text-xs text-white font-medium text-center';
+          nameElement.textContent = name;
+          teamPreview.appendChild(nameElement);
           
-          // Aggiungi gli elementi al container principale
-          teamPreview.appendChild(teamHeader);
-          teamPreview.appendChild(teamDetails);
+          // Aggiungi il periodo
+          const periodElement = document.createElement('span');
+          periodElement.className = 'text-xs text-gray-400 text-center';
+          periodElement.textContent = `${yearStart}-${yearEnd}`;
+          teamPreview.appendChild(periodElement);
           
-          // Se c'è un URL, rendi cliccabile il logo e il nome
-          if (url) {
-            const logoAndName = teamHeader.querySelector('.flex.items-center');
-            const teamLink = document.createElement('a');
-            teamLink.href = url;
-            teamLink.target = '_blank';
-            teamLink.className = 'flex items-center hover:opacity-80 transition-opacity';
-            
-            // Sposta gli elementi dal div originale al link
-            while (logoAndName.firstChild) {
-              teamLink.appendChild(logoAndName.firstChild);
-            }
-            
-            logoAndName.appendChild(teamLink);
-          }
-          
-          // Aggiungi event listener per espandere/comprimere i dettagli
-          const expandBtn = teamHeader.querySelector('.team-expand-btn');
-          expandBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Previeni la propagazione dell'evento
-            
-            // Alterna la visibilità dei dettagli
-            teamDetails.classList.toggle('hidden');
-            
-            // Cambia l'icona in base allo stato
-            if (teamDetails.classList.contains('hidden')) {
-              this.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              `;
-            } else {
-              this.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
-              `;
-            }
-          });
-          
-          // Aggiungi anche un event listener sull'intestazione per espandere/comprimere
-          teamHeader.addEventListener('click', function() {
-            // Simula il click sul pulsante di espansione
-            expandBtn.click();
-          });
-          
-          previewTeams.appendChild(teamPreview);
+          // Aggiungi la squadra al contenitore
+          teamsContainer.appendChild(teamPreview);
         });
+        
+        // Aggiungi il contenitore all'anteprima
+        previewTeams.appendChild(teamsContainer);
       }
       
       // Funzione per ottenere il layout corrente
