@@ -312,51 +312,87 @@
           </div>
           
           <!-- Sezione Sponsor -->
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Sponsor</label>
-            <div class="space-y-4">
-              <!-- Form per aggiungere uno sponsor -->
-              <div class="bg-gray-700 p-3 rounded-md">
-                <div class="mb-3">
-                  <label for="sponsor-url" class="block text-xs font-medium text-gray-400 mb-1">URL Sito Sponsor</label>
-                  <div class="flex">
-                    <input type="text" id="sponsor-url" class="block w-full rounded-l-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. amazon.com">
-                    <button id="sponsor-fetch-favicon" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110 2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label for="sponsor-name" class="block text-xs font-medium text-gray-400 mb-1">Nome Sponsor</label>
-                  <input type="text" id="sponsor-name" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. Amazon">
-                </div>
-                
-                <div class="mb-3">
-                  <label for="sponsor-discount" class="block text-xs font-medium text-gray-400 mb-1">Codice Sconto (opzionale)</label>
-                  <input type="text" id="sponsor-discount" class="block w-full rounded-md bg-gray-800 border-gray-600 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="es. ATLETA10">
-                </div>
-                
-                <div class="flex items-center space-x-3 mt-4">
-                  <div id="sponsor-favicon-preview" class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden">
-                    <span class="text-xs text-gray-500">Logo</span>
-                  </div>
-                  <button id="sponsor-add" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md text-sm flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+          <div class="mb-6 bg-gray-800 rounded-lg p-4">
+            <h2 class="text-lg font-semibold text-white mb-4">Sponsor</h2>
+            
+            <!-- Bottone iniziale -->
+            <div id="sponsor-initial-button" class="mb-4">
+              <button id="sponsor-start-add" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md flex items-center justify-center w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Aggiungi sponsor
+              </button>
+            </div>
+            
+            <!-- Fase 1: Input URL -->
+            <div id="sponsor-url-input-phase" class="mb-4 hidden">
+              <div class="mb-3">
+                <label for="sponsor-url" class="block text-sm font-medium text-gray-300 mb-1">URL dello sponsor</label>
+                <div class="flex">
+                  <input type="text" id="sponsor-url" class="flex-grow bg-gray-700 text-white rounded-l-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="https://www.sponsor.com">
+                  <button id="sponsor-fetch-favicon" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-r-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
                     </svg>
-                    Aggiungi Sponsor
                   </button>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Inserisci l'URL dello sponsor per recuperare automaticamente il logo</p>
+              </div>
+              <div class="flex justify-end">
+                <button id="sponsor-url-cancel" class="text-gray-400 hover:text-white mr-3">Annulla</button>
+              </div>
+            </div>
+            
+            <!-- Fase 2: Dettagli sponsor -->
+            <div id="sponsor-details-phase" class="mb-4 hidden">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Logo sponsor -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Logo sponsor</label>
+                  <div class="flex items-start">
+                    <div id="sponsor-favicon-preview" class="w-16 h-16 bg-gray-700 rounded-md flex items-center justify-center overflow-hidden mr-3">
+                      <span class="text-xs text-gray-500">Logo</span>
+                    </div>
+                    <div class="flex-grow">
+                      <label for="sponsor-custom-logo" class="block text-xs text-gray-400 mb-1">Logo personalizzato (opzionale)</label>
+                      <div class="flex items-center">
+                        <label class="block w-full">
+                          <span class="sr-only">Scegli un logo personalizzato</span>
+                          <input type="file" id="sponsor-custom-logo" class="hidden" accept="image/*">
+                          <div class="bg-gray-700 text-white text-sm py-1 px-3 rounded-md cursor-pointer hover:bg-gray-600 transition-colors">
+                            Scegli file
+                          </div>
+                        </label>
+                      </div>
+                      <span id="sponsor-custom-logo-name" class="text-xs text-gray-400 block mt-1 truncate">Nessun file selezionato</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Nome sponsor -->
+                <div>
+                  <label for="sponsor-name" class="block text-sm font-medium text-gray-300 mb-1">Nome sponsor</label>
+                  <input type="text" id="sponsor-name" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="Nome dello sponsor">
                 </div>
               </div>
               
-              <!-- Lista degli sponsor aggiunti -->
-              <div id="sponsors-list" class="space-y-2">
-                <!-- Gli sponsor aggiunti verranno inseriti qui dinamicamente -->
+              <!-- Codice sconto -->
+              <div class="mb-4">
+                <label for="sponsor-discount" class="block text-sm font-medium text-gray-300 mb-1">Codice sconto (opzionale)</label>
+                <input type="text" id="sponsor-discount" class="w-full bg-gray-700 text-white rounded-md border-0 focus:ring-2 focus:ring-blue-600 px-3 py-2" placeholder="Inserisci il tuo codice sconto">
+              </div>
+              
+              <div class="flex justify-end">
+                <button id="sponsor-details-cancel" class="text-gray-400 hover:text-white mr-3">Annulla</button>
+                <button id="sponsor-add" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md">
+                  Aggiungi
+                </button>
               </div>
             </div>
+            
+            <!-- Lista sponsor -->
+            <div id="sponsors-list" class="space-y-3"></div>
           </div>
           
           <div>
@@ -1350,47 +1386,105 @@
       const sponsorFaviconPreview = document.getElementById('sponsor-favicon-preview');
       const sponsorFetchButton = document.getElementById('sponsor-fetch-favicon');
       const sponsorAddButton = document.getElementById('sponsor-add');
+      const sponsorCustomLogoInput = document.getElementById('sponsor-custom-logo');
+      const sponsorCustomLogoName = document.getElementById('sponsor-custom-logo-name');
       const sponsorsList = document.getElementById('sponsors-list');
       const previewSponsors = document.getElementById('preview-sponsors');
       
-      // Variabile per memorizzare l'URL della favicon corrente
+      // Elementi per le fasi di aggiunta sponsor
+      const sponsorInitialButton = document.getElementById('sponsor-initial-button');
+      const sponsorStartAddButton = document.getElementById('sponsor-start-add');
+      const sponsorUrlInputPhase = document.getElementById('sponsor-url-input-phase');
+      const sponsorUrlCancelButton = document.getElementById('sponsor-url-cancel');
+      const sponsorDetailsPhase = document.getElementById('sponsor-details-phase');
+      const sponsorDetailsCancelButton = document.getElementById('sponsor-details-cancel');
+      
+      // Variabili per memorizzare il logo dello sponsor
       let currentFaviconUrl = '';
+      let customSponsorLogoData = '';
       
-      // Funzione per normalizzare l'URL
-      function normalizeUrl(url) {
-        if (!url.startsWith('http://') && !url.startsWith('https://')) {
-          url = 'https://' + url;
-        }
-        return url;
+      // Funzione per mostrare la fase di input URL
+      function showSponsorUrlInputPhase() {
+        sponsorInitialButton.classList.add('hidden');
+        sponsorUrlInputPhase.classList.remove('hidden');
+        sponsorDetailsPhase.classList.add('hidden');
+        sponsorUrlInput.value = '';
+        sponsorUrlInput.focus();
       }
       
-      // Funzione per estrarre il dominio da un URL
-      function extractDomain(url) {
-        try {
-          const urlObj = new URL(normalizeUrl(url));
-          return urlObj.hostname;
-        } catch (e) {
-          return url;
-        }
+      // Funzione per mostrare la fase di dettagli sponsor
+      function showSponsorDetailsPhase() {
+        sponsorInitialButton.classList.add('hidden');
+        sponsorUrlInputPhase.classList.add('hidden');
+        sponsorDetailsPhase.classList.remove('hidden');
       }
       
-      // Funzione per recuperare la favicon
+      // Funzione per annullare e tornare al bottone iniziale
+      function resetSponsorAddProcess() {
+        sponsorInitialButton.classList.remove('hidden');
+        sponsorUrlInputPhase.classList.add('hidden');
+        sponsorDetailsPhase.classList.add('hidden');
+        
+        // Resetta tutti i campi
+        sponsorUrlInput.value = '';
+        sponsorNameInput.value = '';
+        sponsorDiscountInput.value = '';
+        sponsorCustomLogoName.textContent = 'Nessun file selezionato';
+        sponsorFaviconPreview.innerHTML = '<span class="text-xs text-gray-500">Logo</span>';
+        currentFaviconUrl = '';
+        customSponsorLogoData = '';
+      }
+      
+      // Event listener per il bottone iniziale
+      sponsorStartAddButton.addEventListener('click', showSponsorUrlInputPhase);
+      
+      // Event listener per i pulsanti di annullamento
+      sponsorUrlCancelButton.addEventListener('click', resetSponsorAddProcess);
+      sponsorDetailsCancelButton.addEventListener('click', resetSponsorAddProcess);
+      
+      // Event listener per l'upload del logo personalizzato
+      sponsorCustomLogoInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          sponsorCustomLogoName.textContent = file.name;
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            customSponsorLogoData = e.target.result;
+            
+            // Aggiorna l'anteprima del logo
+            sponsorFaviconPreview.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = customSponsorLogoData;
+            img.className = 'w-full h-full object-contain';
+            sponsorFaviconPreview.appendChild(img);
+            
+            // Imposta il logo personalizzato come logo corrente
+            currentFaviconUrl = '';
+          };
+          
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      // Funzione per recuperare il favicon dello sponsor
       function fetchFavicon(url) {
         const domain = extractDomain(url);
         if (!domain) return;
         
-        // Utilizziamo Google Favicon Service per recuperare la favicon
+        // Utilizziamo Google Favicon Service per recuperare il favicon
         const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
         
-        // Aggiorna l'anteprima della favicon
+        // Aggiorna l'anteprima del favicon
         sponsorFaviconPreview.innerHTML = '';
         const img = document.createElement('img');
         img.src = faviconUrl;
         img.className = 'w-full h-full object-contain';
         sponsorFaviconPreview.appendChild(img);
         
-        // Memorizza l'URL della favicon
+        // Memorizza l'URL del favicon
         currentFaviconUrl = faviconUrl;
+        customSponsorLogoData = '';
         
         // Compila automaticamente il nome dello sponsor se non è già stato inserito
         if (!sponsorNameInput.value) {
@@ -1398,6 +1492,9 @@
           // Rendi maiuscola la prima lettera
           sponsorNameInput.value = sponsorNameInput.value.charAt(0).toUpperCase() + sponsorNameInput.value.slice(1);
         }
+        
+        // Passa alla fase dei dettagli
+        showSponsorDetailsPhase();
       }
       
       // Event listener per il pulsante di recupero favicon
@@ -1407,10 +1504,11 @@
         }
       });
       
-      // Event listener per l'input dell'URL (recupera la favicon quando si preme Enter)
+      // Event listener per l'input dell'URL (recupera il favicon quando si preme Enter)
       sponsorUrlInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && this.value.trim()) {
           fetchFavicon(this.value.trim());
+          e.preventDefault();
         }
       });
       
@@ -1420,40 +1518,107 @@
         const name = sponsorNameInput.value.trim();
         const discount = sponsorDiscountInput.value.trim();
         
-        if (!url || !name || !currentFaviconUrl) return;
+        if (!name || (!currentFaviconUrl && !customSponsorLogoData)) {
+          alert('Inserisci almeno il nome dello sponsor e assicurati di avere un logo.');
+          return;
+        }
         
         // Crea l'elemento per lo sponsor
         const sponsorItem = document.createElement('div');
-        sponsorItem.className = 'flex items-center justify-between bg-gray-700 rounded-md p-2';
-        sponsorItem.dataset.url = normalizeUrl(url);
+        sponsorItem.className = 'bg-gray-700 rounded-md overflow-hidden';
+        sponsorItem.dataset.url = url ? normalizeUrl(url) : '';
         sponsorItem.dataset.name = name;
         sponsorItem.dataset.discount = discount;
-        sponsorItem.dataset.favicon = currentFaviconUrl;
+        sponsorItem.dataset.logo = currentFaviconUrl || customSponsorLogoData;
         
-        // Crea il contenuto dell'elemento
-        sponsorItem.innerHTML = `
+        // Crea l'intestazione compatta (sempre visibile)
+        const sponsorHeader = document.createElement('div');
+        sponsorHeader.className = 'flex items-center justify-between p-3 cursor-pointer hover:bg-gray-600 transition-colors';
+        
+        // Aggiungi il contenuto dell'intestazione
+        sponsorHeader.innerHTML = `
           <div class="flex items-center">
-            <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden mr-3">
-              <img src="${currentFaviconUrl}" class="w-8 h-8 object-contain" alt="${name}">
+            <div class="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center overflow-hidden mr-3">
+              <img src="${currentFaviconUrl || customSponsorLogoData}" class="w-10 h-10 object-contain" alt="${name}">
             </div>
-            <div>
-              <div class="text-sm font-medium text-white">${name}</div>
-              <div class="text-xs text-gray-400">${extractDomain(url)}</div>
-              ${discount ? `<div class="text-xs text-green-400 mt-1">Codice: ${discount}</div>` : ''}
-            </div>
+            <div class="text-sm font-medium text-white">${name}</div>
           </div>
-          <button class="remove-sponsor-btn text-gray-400 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
+          <div class="flex items-center space-x-2">
+            <button class="sponsor-expand-btn text-gray-400 hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <button class="remove-sponsor-btn text-gray-400 hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
         `;
         
+        // Crea il contenuto dettagliato (nascosto di default)
+        const sponsorDetails = document.createElement('div');
+        sponsorDetails.className = 'p-3 border-t border-gray-600 hidden bg-gray-800';
+        
+        // Aggiungi il contenuto dei dettagli
+        sponsorDetails.innerHTML = `
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <span class="text-xs text-gray-400">URL:</span>
+              <div class="text-sm text-white truncate">${url || 'Non specificato'}</div>
+            </div>
+            ${discount ? `
+            <div>
+              <span class="text-xs text-gray-400">Codice sconto:</span>
+              <div class="text-sm text-white">${discount}</div>
+            </div>
+            ` : ''}
+          </div>
+        `;
+        
+        // Aggiungi gli elementi al container principale
+        sponsorItem.appendChild(sponsorHeader);
+        sponsorItem.appendChild(sponsorDetails);
+        
         // Aggiungi event listener per il pulsante di rimozione
-        const removeBtn = sponsorItem.querySelector('.remove-sponsor-btn');
-        removeBtn.addEventListener('click', function() {
+        const removeBtn = sponsorHeader.querySelector('.remove-sponsor-btn');
+        removeBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Previeni la propagazione dell'evento
           sponsorItem.remove();
           updateSponsorsPreview();
+        });
+        
+        // Aggiungi event listener per espandere/comprimere i dettagli
+        const expandBtn = sponsorHeader.querySelector('.sponsor-expand-btn');
+        expandBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Previeni la propagazione dell'evento
+          
+          // Alterna la visibilità dei dettagli
+          sponsorDetails.classList.toggle('hidden');
+          
+          // Cambia l'icona in base allo stato
+          if (sponsorDetails.classList.contains('hidden')) {
+            this.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            `;
+          } else {
+            this.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+              </svg>
+            `;
+          }
+        });
+        
+        // Aggiungi anche un event listener sull'intestazione per espandere/comprimere
+        sponsorHeader.addEventListener('click', function(e) {
+          // Simula il click sul pulsante di espansione
+          if (!e.target.closest('.remove-sponsor-btn')) {
+            expandBtn.click();
+          }
         });
         
         // Aggiungi l'elemento alla lista
@@ -1462,12 +1627,8 @@
         // Aggiorna l'anteprima
         updateSponsorsPreview();
         
-        // Resetta i campi
-        sponsorUrlInput.value = '';
-        sponsorNameInput.value = '';
-        sponsorDiscountInput.value = '';
-        sponsorFaviconPreview.innerHTML = '<span class="text-xs text-gray-500">Logo</span>';
-        currentFaviconUrl = '';
+        // Resetta il processo di aggiunta
+        resetSponsorAddProcess();
       }
       
       // Event listener per il pulsante di aggiunta sponsor
@@ -1475,70 +1636,64 @@
       
       // Funzione per aggiornare l'anteprima degli sponsor
       function updateSponsorsPreview() {
+        // Svuota il contenitore dell'anteprima
         previewSponsors.innerHTML = '';
         
-        // Ottieni tutti gli sponsor aggiunti
-        const addedSponsors = document.querySelectorAll('#sponsors-list > div');
+        // Ottieni tutti gli sponsor dalla lista
+        const sponsors = sponsorsList.querySelectorAll('div[data-name]');
         
-        // Se non ci sono sponsor, nascondi la sezione
-        const sponsorSection = previewSponsors.parentElement;
-        if (addedSponsors.length === 0) {
-          sponsorSection.classList.add('hidden');
+        if (sponsors.length === 0) {
+          // Se non ci sono sponsor, mostra un messaggio
+          previewSponsors.innerHTML = '<p class="text-sm text-gray-400 text-center">Nessuno sponsor aggiunto</p>';
           return;
-        } else {
-          sponsorSection.classList.remove('hidden');
         }
         
-        // Ottieni il layout corrente
-        const currentLayout = getCurrentLayout();
+        // Crea un contenitore flessibile per gli sponsor
+        const sponsorsContainer = document.createElement('div');
+        sponsorsContainer.className = 'flex flex-wrap justify-center gap-3';
         
-        // Applica l'allineamento in base al layout
-        previewSponsors.classList.remove('justify-center', 'justify-start', 'justify-end');
-        if (currentLayout === 'centered') {
-          previewSponsors.classList.add('justify-center');
-        } else if (currentLayout === 'left') {
-          previewSponsors.classList.add('justify-start');
-        } else if (currentLayout === 'right') {
-          previewSponsors.classList.add('justify-end');
-        }
-        
-        // Aggiorna anche l'allineamento del titolo della sezione
-        const sponsorSectionTitle = sponsorSection.querySelector('h3');
-        if (sponsorSectionTitle) {
-          sponsorSectionTitle.classList.remove('text-center', 'text-left', 'text-right');
-          if (currentLayout === 'centered') {
-            sponsorSectionTitle.classList.add('text-center');
-          } else if (currentLayout === 'left') {
-            sponsorSectionTitle.classList.add('text-left');
-          } else if (currentLayout === 'right') {
-            sponsorSectionTitle.classList.add('text-right');
-          }
-        }
-        
-        // Aggiungi gli sponsor all'anteprima
-        addedSponsors.forEach(sponsorItem => {
-          const url = sponsorItem.dataset.url;
-          const name = sponsorItem.dataset.name;
-          const discount = sponsorItem.dataset.discount;
-          const favicon = sponsorItem.dataset.favicon;
+        // Aggiungi ogni sponsor all'anteprima
+        sponsors.forEach(sponsor => {
+          const name = sponsor.dataset.name;
+          const logo = sponsor.dataset.logo;
+          const discount = sponsor.dataset.discount;
           
           // Crea l'elemento per lo sponsor nell'anteprima
-          const sponsorPreview = document.createElement('a');
-          sponsorPreview.href = url;
-          sponsorPreview.target = '_blank';
-          sponsorPreview.className = 'flex flex-col items-center bg-gray-800 rounded-md p-2 w-20 hover:bg-gray-700 transition-colors';
+          const sponsorPreview = document.createElement('div');
+          sponsorPreview.className = 'flex flex-col items-center';
           
-          // Aggiungi il contenuto
-          sponsorPreview.innerHTML = `
-            <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center overflow-hidden mb-1">
-              <img src="${favicon}" class="w-8 h-8 object-contain" alt="${name}">
-            </div>
-            <div class="text-xs font-medium text-center text-white truncate w-full">${name}</div>
-            ${discount ? `<div class="text-xs text-green-400 truncate w-full text-center">${discount}</div>` : ''}
-          `;
+          // Aggiungi il logo
+          const logoContainer = document.createElement('div');
+          logoContainer.className = 'w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center overflow-hidden mb-1';
           
-          previewSponsors.appendChild(sponsorPreview);
+          const logoImg = document.createElement('img');
+          logoImg.src = logo;
+          logoImg.className = 'w-10 h-10 object-contain';
+          logoImg.alt = name;
+          
+          logoContainer.appendChild(logoImg);
+          sponsorPreview.appendChild(logoContainer);
+          
+          // Aggiungi il nome
+          const nameElement = document.createElement('span');
+          nameElement.className = 'text-xs text-white font-medium text-center';
+          nameElement.textContent = name;
+          sponsorPreview.appendChild(nameElement);
+          
+          // Aggiungi il codice sconto se presente
+          if (discount) {
+            const discountElement = document.createElement('span');
+            discountElement.className = 'text-xs text-gray-400 text-center';
+            discountElement.textContent = `Sconto: ${discount}`;
+            sponsorPreview.appendChild(discountElement);
+          }
+          
+          // Aggiungi lo sponsor al contenitore
+          sponsorsContainer.appendChild(sponsorPreview);
         });
+        
+        // Aggiungi il contenitore all'anteprima
+        previewSponsors.appendChild(sponsorsContainer);
       }
       
       // Gestione delle squadre
@@ -1903,6 +2058,24 @@
       function getCurrentLayout() {
         const checkedLayout = document.querySelector('input[name="layout"]:checked');
         return checkedLayout ? checkedLayout.value : 'centered'; // Default a centered
+      }
+      
+      // Funzione per normalizzare l'URL
+      function normalizeUrl(url) {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+          url = 'https://' + url;
+        }
+        return url;
+      }
+      
+      // Funzione per estrarre il dominio da un URL
+      function extractDomain(url) {
+        try {
+          const urlObj = new URL(normalizeUrl(url));
+          return urlObj.hostname;
+        } catch (e) {
+          return url;
+        }
       }
     });
   </script>
