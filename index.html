@@ -986,17 +986,155 @@
         option.addEventListener('change', function() {
           const layout = this.value;
           
-          // Rimuovi tutte le classi di allineamento
+          // Rimuovi tutte le classi di allineamento dal contenitore principale
           previewContent.classList.remove('items-center', 'items-start', 'items-end');
           previewContent.classList.remove('text-center', 'text-left', 'text-right');
           
+          // Ottieni il contenitore principale degli elementi del profilo
+          const profileContainer = document.querySelector('#preview-content > div');
+          
+          // Rimuovi le classi di allineamento dal contenitore del profilo
+          profileContainer.classList.remove('items-center', 'items-start', 'items-end');
+          profileContainer.classList.remove('flex-col', 'flex-row', 'flex-wrap');
+          
+          // Ottieni gli elementi principali del profilo
+          const profileImage = document.getElementById('preview-profile-image');
+          const profileName = document.getElementById('preview-name');
+          const profileBio = document.getElementById('preview-bio');
+          
+          // Rimuovi le classi di margine e allineamento dagli elementi principali
+          profileImage.classList.remove('mb-6', 'mr-4', 'ml-4', 'mx-auto');
+          profileName.classList.remove('text-center', 'text-left', 'text-right', 'mb-2');
+          profileBio.classList.remove('text-center', 'text-left', 'text-right', 'mb-8', 'max-w-xs');
+          
+          // Ripristina la struttura originale (rimuovi eventuali contenitori creati in precedenza)
+          const nameAndBioContainer = profileName.parentElement;
+          if (nameAndBioContainer && nameAndBioContainer.classList.contains('flex-col') && nameAndBioContainer !== profileContainer) {
+            // Sposta nome e bio fuori dal contenitore e rimuovi il contenitore
+            nameAndBioContainer.parentNode.insertBefore(profileName, nameAndBioContainer);
+            nameAndBioContainer.parentNode.insertBefore(profileBio, nameAndBioContainer.nextSibling);
+            nameAndBioContainer.remove();
+          }
+          
           // Applica il nuovo layout
           if (layout === 'centered') {
+            // Layout centrato (verticale)
             previewContent.classList.add('items-center', 'text-center');
+            profileContainer.classList.add('items-center', 'flex-col');
+            
+            // Stile per gli elementi principali
+            profileImage.classList.add('mb-6', 'mx-auto');
+            profileName.classList.add('text-center', 'mb-2');
+            profileBio.classList.add('text-center', 'mb-8', 'max-w-xs');
+            
           } else if (layout === 'left') {
+            // Layout allineato a sinistra (orizzontale per gli elementi principali)
             previewContent.classList.add('items-start', 'text-left');
+            profileContainer.classList.add('items-start', 'flex-row', 'flex-wrap');
+            
+            // Stile per gli elementi principali
+            profileImage.classList.add('mr-4');
+            profileName.classList.add('text-left');
+            profileBio.classList.add('text-left', 'w-full', 'mt-2');
+            
           } else if (layout === 'right') {
+            // Layout allineato a destra
             previewContent.classList.add('items-end', 'text-right');
+            profileContainer.classList.add('items-end', 'flex-col');
+            
+            // Stile per gli elementi principali
+            profileImage.classList.add('mb-6', 'mx-auto');
+            profileName.classList.add('text-right', 'mb-2');
+            profileBio.classList.add('text-right', 'mb-8', 'max-w-xs');
+          }
+          
+          // Aggiorna anche l'allineamento degli altri elementi all'interno del preview
+          const previewNationalities = document.getElementById('preview-nationalities');
+          const previewLinks = document.getElementById('preview-links');
+          const previewSponsorsSection = document.getElementById('preview-sponsors').parentElement;
+          const previewTeamsSection = document.getElementById('preview-teams').parentElement;
+          
+          // Rimuovi le classi di allineamento del testo
+          [previewNationalities, previewLinks, previewSponsorsSection, previewTeamsSection].forEach(el => {
+            if (el) {
+              el.classList.remove('text-center', 'text-left', 'text-right');
+              el.classList.remove('mx-auto', 'ml-0', 'mr-0');
+            }
+          });
+          
+          // Applica l'allineamento del testo in base al layout
+          if (layout === 'centered') {
+            [previewNationalities, previewLinks, previewSponsorsSection, previewTeamsSection].forEach(el => {
+              if (el) {
+                el.classList.add('text-center');
+                el.classList.add('mx-auto');
+              }
+            });
+            
+            // Centra i link social
+            if (previewLinks) {
+              previewLinks.classList.add('justify-center');
+              previewLinks.classList.remove('justify-start', 'justify-end');
+            }
+            
+          } else if (layout === 'left') {
+            [previewNationalities, previewLinks, previewSponsorsSection, previewTeamsSection].forEach(el => {
+              if (el) {
+                el.classList.add('text-left');
+                el.classList.add('ml-0');
+              }
+            });
+            
+            // Allinea i link social a sinistra
+            if (previewLinks) {
+              previewLinks.classList.add('justify-start');
+              previewLinks.classList.remove('justify-center', 'justify-end');
+            }
+            
+          } else if (layout === 'right') {
+            [previewNationalities, previewLinks, previewSponsorsSection, previewTeamsSection].forEach(el => {
+              if (el) {
+                el.classList.add('text-right');
+                el.classList.add('mr-0');
+              }
+            });
+            
+            // Allinea i link social a destra
+            if (previewLinks) {
+              previewLinks.classList.add('justify-end');
+              previewLinks.classList.remove('justify-center', 'justify-start');
+            }
+          }
+          
+          // Aggiorna anche l'allineamento dei titoli nelle sezioni
+          const sectionTitles = document.querySelectorAll('#preview-content h3');
+          sectionTitles.forEach(title => {
+            title.classList.remove('text-center', 'text-left', 'text-right');
+            if (layout === 'centered') {
+              title.classList.add('text-center');
+            } else if (layout === 'left') {
+              title.classList.add('text-left');
+            } else if (layout === 'right') {
+              title.classList.add('text-right');
+            }
+          });
+          
+          // Aggiorna l'allineamento degli elementi nelle sezioni sponsor e squadre
+          if (layout === 'centered') {
+            document.getElementById('preview-sponsors').classList.add('justify-center');
+            document.getElementById('preview-sponsors').classList.remove('justify-start', 'justify-end');
+            document.getElementById('preview-teams').classList.add('items-center');
+            document.getElementById('preview-teams').classList.remove('items-start', 'items-end');
+          } else if (layout === 'left') {
+            document.getElementById('preview-sponsors').classList.add('justify-start');
+            document.getElementById('preview-sponsors').classList.remove('justify-center', 'justify-end');
+            document.getElementById('preview-teams').classList.add('items-start');
+            document.getElementById('preview-teams').classList.remove('items-center', 'items-end');
+          } else if (layout === 'right') {
+            document.getElementById('preview-sponsors').classList.add('justify-end');
+            document.getElementById('preview-sponsors').classList.remove('justify-center', 'justify-start');
+            document.getElementById('preview-teams').classList.add('items-end');
+            document.getElementById('preview-teams').classList.remove('items-center', 'items-start');
           }
         });
       });
@@ -1307,6 +1445,32 @@
           sponsorSection.classList.remove('hidden');
         }
         
+        // Ottieni il layout corrente
+        const currentLayout = getCurrentLayout();
+        
+        // Applica l'allineamento in base al layout
+        previewSponsors.classList.remove('justify-center', 'justify-start', 'justify-end');
+        if (currentLayout === 'centered') {
+          previewSponsors.classList.add('justify-center');
+        } else if (currentLayout === 'left') {
+          previewSponsors.classList.add('justify-start');
+        } else if (currentLayout === 'right') {
+          previewSponsors.classList.add('justify-end');
+        }
+        
+        // Aggiorna anche l'allineamento del titolo della sezione
+        const sponsorSectionTitle = sponsorSection.querySelector('h3');
+        if (sponsorSectionTitle) {
+          sponsorSectionTitle.classList.remove('text-center', 'text-left', 'text-right');
+          if (currentLayout === 'centered') {
+            sponsorSectionTitle.classList.add('text-center');
+          } else if (currentLayout === 'left') {
+            sponsorSectionTitle.classList.add('text-left');
+          } else if (currentLayout === 'right') {
+            sponsorSectionTitle.classList.add('text-right');
+          }
+        }
+        
         // Aggiungi gli sponsor all'anteprima
         addedSponsors.forEach(sponsorItem => {
           const url = sponsorItem.dataset.url;
@@ -1602,6 +1766,32 @@
           teamSection.classList.remove('hidden');
         }
         
+        // Ottieni il layout corrente
+        const currentLayout = getCurrentLayout();
+        
+        // Applica l'allineamento in base al layout
+        previewTeams.classList.remove('items-center', 'items-start', 'items-end');
+        if (currentLayout === 'centered') {
+          previewTeams.classList.add('items-center');
+        } else if (currentLayout === 'left') {
+          previewTeams.classList.add('items-start');
+        } else if (currentLayout === 'right') {
+          previewTeams.classList.add('items-end');
+        }
+        
+        // Aggiorna anche l'allineamento del titolo della sezione
+        const teamSectionTitle = teamSection.querySelector('h3');
+        if (teamSectionTitle) {
+          teamSectionTitle.classList.remove('text-center', 'text-left', 'text-right');
+          if (currentLayout === 'centered') {
+            teamSectionTitle.classList.add('text-center');
+          } else if (currentLayout === 'left') {
+            teamSectionTitle.classList.add('text-left');
+          } else if (currentLayout === 'right') {
+            teamSectionTitle.classList.add('text-right');
+          }
+        }
+        
         // Aggiungi le squadre all'anteprima
         addedTeams.forEach(teamItem => {
           const url = teamItem.dataset.url;
@@ -1711,6 +1901,12 @@
           
           previewTeams.appendChild(teamPreview);
         });
+      }
+      
+      // Funzione per ottenere il layout corrente
+      function getCurrentLayout() {
+        const checkedLayout = document.querySelector('input[name="layout"]:checked');
+        return checkedLayout ? checkedLayout.value : 'centered'; // Default a centered
       }
     });
   </script>
